@@ -11,6 +11,7 @@ type Config struct {
 	SecretKey         string
 	RefreshSecretKey  string
 	Issuer            string
+	Subject           string
 	Aud               string
 	ExpirationHours   int
 	RefreshExpiration time.Duration
@@ -34,7 +35,8 @@ func (w *JWTWrapper) GenerateToken(id uuid.UUID) (string, *jwt.Time, error) {
 	pl := JwtPayload{
 		Payload: jwt.Payload{
 			Issuer:         w.Config.Issuer,
-			Subject:        w.Config.Aud,
+			Subject:        w.Config.Subject,
+			Audience:       []string{w.Config.Aud},
 			ExpirationTime: jwt.NumericDate(now.Add(exp)),
 			IssuedAt:       jwt.NumericDate(now),
 		},

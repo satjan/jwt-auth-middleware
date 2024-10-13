@@ -11,6 +11,7 @@ func main() {
 		SecretKey:         "secret",
 		RefreshSecretKey:  "refresh-secret",
 		Issuer:            "my-app",
+		Subject:           "my-subject",
 		Aud:               "my-audience",
 		ExpirationHours:   24,
 		RefreshExpiration: 720 * time.Hour,
